@@ -1,0 +1,23 @@
+#include <Arduino.h>
+#include "SimpleTimer.h"
+
+SimpleTimer timer1;
+
+void setup()
+{
+  Serial.begin(74880);
+  Serial.println();
+}
+
+
+void loop() {
+
+    // Schedules functions in at preset times
+    if(timer1.event(1000,12)){
+        if(timer1.eventCount()==2){WiFi.printDiag(Serial);}
+        if(timer1.eventCount()==4){WiFi.scanNetworksAsync(printScanResult);}
+        if(timer1.eventCount()==8){WiFi.printDiag(Serial);}
+        if(timer1.eventCount()==12){WiFi.scanNetworksAsync(printScanResult);}
+    }
+    // Your program here
+}

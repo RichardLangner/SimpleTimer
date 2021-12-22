@@ -7,7 +7,7 @@ Use enable to turn on/off
     Stop    :  timer1.enabled(false);
     Restart :  timer1.enabled(true);
 
-Richard Langner, Sheffield Hackspace, UK. 1 Dec 2021.
+Richard Langner, Sheffield Hackspace, UK. 17 Dec 2021.
 */
 #include "SimpleTimer.h"
 
@@ -20,7 +20,7 @@ void setup() {
 
 void loop() {
     // Toggle LED after 200ms, repeat 10 times then stop
-	if(timer1.timedOut(100,10) ){
+	if(timer1.event(100,10) ){
     digitalWrite(ledPin1, !digitalRead(ledPin1));
     }
 }

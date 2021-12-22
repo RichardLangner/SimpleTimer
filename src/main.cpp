@@ -1,24 +1,27 @@
 /*
-Blink simple - Blink an LED without blocking or using interrupts.
+Schedules functions- although it is in loop(), it only runs once.
+To run it again from another part of your program use -
+        schedule.enable(true);
 
-Uses timer1 to blink an LED continuously.
-    Stop    :  timer1.enabled(false);
-    Restart :  timer1.enabled(true);
-
-Richard Langner, Sheffield Hackspace, UK. 1 Dec 2021.
+Richard Langner, Sheffield Hackspace, UK. 17 Dec 2021.
 */
+#include <Arduino.h>
 #include "SimpleTimer.h"
 
-SimpleTimer timer1;
-const int ledPin1 = LED_BUILTIN;
+SimpleTimer mySchedule;     // Create a timer
+unsigned long offset;
 
-void setup() {
-  pinMode(ledPin1, OUTPUT); 
+void setup(){
+  Serial.begin(74880);  // Select your own speed
+  offset=millis();
 }
 
+
 void loop() {
-    // Toggle LED every 250ms
-	if(timer1.timedOut(250) ){
-    digitalWrite(ledPin1, !digitalRead(ledPin1));
+
+    if(mySchedule.event(10,8)){ // One event per second, so no need to go more than 8 events
+        Serial.printf("%4lums event %d\n",(millis()-offset),mySchedule.eventCount());
+        if(mySchedule.eventCount()==6){Serial.printf("%4lums event %s \n",(millis()-offset), "event counter=6");}
     }
+    // Your program here
 }

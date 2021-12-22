@@ -20,7 +20,7 @@ void heartbeat(){
   static bool b=true, direction;;
   static int on=18, off=2, toggles, stepCounter;
 
-	if(timer1.timedOut(b ? off:on) ){
+	if(timer1.event(b ? off:on) ){
     digitalWrite(ledPin1, b);
     b=!b; toggles += 1;
     if(toggles == 4){

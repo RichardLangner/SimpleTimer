@@ -1,13 +1,19 @@
-/*SimpleTimer v1.0,  27 November 2021
+/*SimpleTimer v2.0,  17 December 2021
 * By Richard Langner, Sheffield, UK
 * A light-weight non-blocking interrupt-free timer class.
+*
+* INITIALISE
+* 		SimpleTimer timer1;
 * 
-* AUTO-REPEAT every 500ms
-* 		if(timer1.timedOut(500){...}
+* AUTO-REPEAT every 500ms until disabled
+* 		if(timer1.event(500){...}
 * 
 * AUTO-REPEAT every 500ms, do this 10 times
-* 		if(timer1.timedOut(500, 10){...}
-* 
+* 		if(timer1.event(500, 10){...}
+*
+* SINGLE-SHOT after 500ms, do it once
+* 		if(timer1.event(500, 1){...}
+*
 * ENABLE
 * 		timer1.enabled(true);
 * 		timer1.enabled(false);
@@ -17,21 +23,26 @@
 * 		t = timer1.elapsed();
 * 
 * AUTO-REPEATS COMPLETED (zero if continuous)
-* 		c = cycleCount();
+* 		c = eventCount();
 */
 #ifndef SIMPLE_TIMER
 #define SIMPLE_TIMER
 #include <Arduino.h>
 
+#define XXn(message) Serial.printf("Line:%2d data %d\n",__LINE__, message);
+#define XXs(message) Serial.printf("Line:%2d data %s\n",__LINE__, message);
+
+/** Timer/scheduler with millisecond accuracy */
 class SimpleTimer	
 {
 //------------------ Private ----------------
 private:
-	unsigned long setMillis=0, prevMillis = 0;
-	int timedOutFlag, _cycleCount;
+	unsigned long _setMillis=0, _prevMillis = 0;
+	int  _eventCount;
 	bool _enabled=true;
-	bool timedOutFunction(){return (millis() - prevMillis >= setMillis);}
-	void start(unsigned long u = 1000){	setMillis=u; prevMillis=millis(); _enabled=true;}
+	bool timedOutFunction(){return (millis() - _prevMillis >= _setMillis);}
+	void _start(unsigned long u){	_setMillis=u; _prevMillis=millis();}
+	bool firstRun=true;
 
 //------------------ Public -----------------
 public:
@@ -41,21 +52,31 @@ bool			userBoolA, 	userBoolB;
 unsigned long 	userULongA,	userULongB;
 virtual ~ SimpleTimer(){}
 
-bool timedOut(unsigned long msecs, int cycles=0){
+/** @param msecs milliseconds before the event returns true
+*	@param cycles (optional) number of cycles required (0 means continuous)*/
+bool event(unsigned long msecs, int cycles=0){
 	if(!_enabled){return false;}							// Not valid timeOut
+				// First run, reset millis
 	if(!timedOutFunction()){return false;}					// Not valid timeOut
-	if(cycles==0){start(msecs);return true;}				// Continuous mode?
-	if(cycles > _cycleCount++ ){start(msecs);return true;}	// Valid timeOut
-	_enabled=false;											// Sleep now ...
+	if(cycles==0){_start(msecs);return true;}				// Continuous mode?
+XXn (firstRun)	if(firstRun){_start(msecs); firstRun=false; return false;}
+XXn (cycles)	if(cycles > _eventCount++ ){_start(msecs);return true;}	// Valid timeOut
+XXn (_eventCount)
+	_enabled=false;	
+	firstRun=true;	
+XXn (firstRun)								// Sleep now ...
 	return false;
 }
-
+/**	@return true if enabled */
 bool enabled(){return _enabled;}
 
-void enabled(bool enabled){	_enabled=enabled; _cycleCount=0;}
+/** @param enabled Set to 'true' to enable the timer */
+void enable(bool enabled=true){	_enabled=enabled; _eventCount=0; firstRun=true;}
 
-unsigned long elapsed(){return timedOutFunction() ? 0 : millis() - prevMillis;}
+/**	@return milliseconds since enabled, 0 if disabled */
+unsigned long elapsed(){return timedOutFunction() ? 0 : millis() - _prevMillis;}
 
-int cycleCount(){return _cycleCount;}
+/** @return number of completed cycle events  */
+int eventCount(){return _eventCount;}
 };
 #endif

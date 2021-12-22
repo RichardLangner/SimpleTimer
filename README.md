@@ -3,20 +3,21 @@
 * Auto repeat
 * Multiple shot and Single shot
 * Enable/disable
-* Auto-starts if enabled
+* Auto-starts when enabled
 * Non-blocking code does not slow your program
 * Does not require interrupts, works on any GPIO pin
+* Schedule functions, to  run one or more times
 ## WHO NEEDS NEED IT?
 If you want to blink an LED, refresh an LCD or regularly read sensors, this is for you.
 ## AUTO-REPEAT<br>
 To run code every 500ms<br>
-* `if(timer1.timedOut(500){...}`<br>
+* `if(timer1.event(500){...}`<br>
 ## MULTIPLE AND SINGLE-SHOT
 Multiple-shot : To run code every 500ms, but only run it 10 times<br>
-* `if(timer1.timedOut(500, 10){...}`
+* `if(timer1.event(500, 10){...}`
 
 Single-shot : To run code once after a 500ms delay, use a repeat of 1<br>
-* `if(timer1.timedOut(500, 1){...}`<br>
+* `if(timer1.event(500, 1){...}`<br>
 
 ## ENABLE/DISABLE ( START-STOP )
 To start a SimpleTimer if it was previously stopped (resets cycle count)<br>
@@ -38,7 +39,7 @@ When using Multiple-shot, it returns the number of completed time-outs. In auto-
 The examples in the `SimpleTimer examples` folder use the board's LED_BUILTIN to demonstrate most of SimpleTimer's features.
 ## FLASHING AN LED
 Flashing an LED is simple. It starts automatically, and you can stop/start it<br>
-* `if(timer1.timedOut(250) ){`<br>
+* `if(timer1.event(250) ){`<br>
 `digitalWrite(ledPin1, !digitalRead(ledPin1));`<br>
 `}`<br>
 
@@ -50,12 +51,12 @@ To restart the flashing
 
 ## FLASHING AN LED - SINGLE OR MULTIPLE TIMES
 A single flash has 2 transitions, on and off<br>
-* `if(timer1.timedOut(250,2) ){`<br>
+* `if(timer1.event(250,2) ){`<br>
 `digitalWrite(ledPin1, !digitalRead(ledPin1));`<br>
 `}`
 
 Five flashes have 10 transitions<br>
-* `if(timer1.timedOut(250,10) ){`<br>
+* `if(timer1.event(250,10) ){`<br>
 `digitalWrite(ledPin1, !digitalRead(ledPin1));`<br>
 `}`<br>
 
