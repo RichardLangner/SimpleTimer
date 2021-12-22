@@ -1,4 +1,4 @@
-/*SimpleTimer v2.0,  17 December 2021
+/*SimpleTimer v2.0,  22 December 2021
 * By Richard Langner, Sheffield, UK
 * A light-weight non-blocking interrupt-free timer class.
 *
@@ -29,9 +29,6 @@
 #define SIMPLE_TIMER
 #include <Arduino.h>
 
-#define XXn(message) Serial.printf("Line:%2d data %d\n",__LINE__, message);
-#define XXs(message) Serial.printf("Line:%2d data %s\n",__LINE__, message);
-
 /** Timer/scheduler with millisecond accuracy */
 class SimpleTimer	
 {
@@ -55,16 +52,13 @@ virtual ~ SimpleTimer(){}
 /** @param msecs milliseconds before the event returns true
 *	@param cycles (optional) number of cycles required (0 means continuous)*/
 bool event(unsigned long msecs, int cycles=0){
-	if(!_enabled){return false;}							// Not valid timeOut
-				// First run, reset millis
-	if(!timedOutFunction()){return false;}					// Not valid timeOut
-	if(cycles==0){_start(msecs);return true;}				// Continuous mode?
-XXn (firstRun)	if(firstRun){_start(msecs); firstRun=false; return false;}
-XXn (cycles)	if(cycles > _eventCount++ ){_start(msecs);return true;}	// Valid timeOut
-XXn (_eventCount)
+	if(!_enabled){return false;}				// Not valid timeOut
+	if(!timedOutFunction()){return false;}		// Not valid timeOut
+	if(cycles==0){_start(msecs);return true;}	// Continuous mode?
+	if(firstRun){_start(msecs); firstRun=false; return false;}
+	if(cycles > _eventCount++ ){_start(msecs);return true;}	// Valid timeOut
 	_enabled=false;	
-	firstRun=true;	
-XXn (firstRun)								// Sleep now ...
+	firstRun=true;								// Sleep now ...
 	return false;
 }
 /**	@return true if enabled */

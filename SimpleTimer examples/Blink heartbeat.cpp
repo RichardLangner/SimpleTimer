@@ -1,11 +1,11 @@
 /*
 Heartbeat : a pulsing glow from an LED without blocking or using interrupts.
 
-Use enable to turn on/off e.g.
-    Stop    :  timer1.enabled(false);
-    Restart :  timer1.enabled(true);
+Use enable() to turn on/off e.g.
+    Stop    :  timer1.enable(false);
+    Restart :  timer1.enable(true);
     
-Richard Langner et Al, Sheffield Hackspace, UK. 1 Dec 2021.
+Richard Langner et Al, Sheffield Hackspace, UK. 22 Dec 2021.
 */
 #include "SimpleTimer.h"
 

@@ -2,10 +2,10 @@
 Blink simple - Blink an LED without blocking or using interrupts.
 
 Uses timer1 to blink an LED continuously.
-    Stop    :  timer1.enabled(false);
-    Restart :  timer1.enabled(true);
+    Stop    :  timer1.enable(false);
+    Restart :  timer1.enable(true);
 
-Richard Langner, Sheffield Hackspace, UK. 17 Dec 2021.
+Richard Langner, Sheffield Hackspace, UK. 22 Dec 2021.
 */
 #include "SimpleTimer.h"
 

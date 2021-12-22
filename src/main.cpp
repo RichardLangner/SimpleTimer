@@ -1,27 +1,33 @@
 /*
-Schedules functions- although it is in loop(), it only runs once.
-To run it again from another part of your program use -
-        schedule.enable(true);
+This example schedules functions to run at certain times.
+To use the scheduler in your own code, substitute the
+    {Serial.println("...");} 
+functions with your own functions.
 
-Richard Langner, Sheffield Hackspace, UK. 17 Dec 2021.
+Although the code is in the main program loop() it only runs once 
+for each of the print functions.
+To repeat the process later in your code, simply reset the timer with
+    timer1.enable(true)
 */
+
 #include <Arduino.h>
 #include "SimpleTimer.h"
 
-SimpleTimer mySchedule;     // Create a timer
-unsigned long offset;
+SimpleTimer timer1;
 
-void setup(){
-  Serial.begin(74880);  // Select your own speed
-  offset=millis();
+void setup()
+{
+  Serial.begin(74880);
+  Serial.println();
 }
 
-
 void loop() {
-
-    if(mySchedule.event(10,8)){ // One event per second, so no need to go more than 8 events
-        Serial.printf("%4lums event %d\n",(millis()-offset),mySchedule.eventCount());
-        if(mySchedule.eventCount()==6){Serial.printf("%4lums event %s \n",(millis()-offset), "event counter=6");}
+    // Schedules functions in at preset times 
+    if(timer1.event(1000,12)){
+        if(timer1.eventCount()== 2){Serial.println("Function 1 runs at 2 seconds");}
+        if(timer1.eventCount()== 4){Serial.println("Function 2 runs at 4 seconds");}
+        if(timer1.eventCount()== 8){Serial.println("Function 3 runs at 8 seconds");}
+        if(timer1.eventCount()==12){Serial.println("Function 4 runs at 12 seconds");}
     }
-    // Your program here
+    // Your main program code here
 }
