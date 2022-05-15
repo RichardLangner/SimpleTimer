@@ -1,35 +1,33 @@
-/*SimpleTimer v2.0,  22 December 2021
+/*SimpleTimer v2.1,  15 May 2022
 * By Richard Langner, Sheffield, UK
-* A light-weight non-blocking interrupt-free timer class.
+* A light-weight non-blocking interrupt-free timer
+* with millisecond accuracy.
 *
 * INITIALISE
 * 		SimpleTimer timer1;
 * 
 * AUTO-REPEAT every 500ms until disabled
-* 		if(timer1.event(500){...}
+* 		if(timer1.done(500){...}
 * 
 * AUTO-REPEAT every 500ms, do this 10 times
-* 		if(timer1.event(500, 10){...}
+* 		if(timer1.done(500, 10){...}
 *
 * SINGLE-SHOT after 500ms, do it once
-* 		if(timer1.event(500, 1){...}
+* 		if(timer1.done(500, 1){...}
 *
 * ENABLE
 * 		timer1.enabled(true);
 * 		timer1.enabled(false);
-* 		if(timer1.enabled()){...}
+* 		if(timer1.isEnabled()){...}
 * 
-* TIME ELAPSED
-* 		t = timer1.elapsed();
-* 
-* AUTO-REPEATS COMPLETED (zero if continuous)
-* 		c = eventCount();
+* TIME ELAPSED since a timing period began
+* 		unsigned long t = timer1.elapsed();
 */
 #ifndef SIMPLE_TIMER
 #define SIMPLE_TIMER
 #include <Arduino.h>
 
-/** Timer/scheduler with millisecond accuracy */
+/** Timer with millisecond accuracy */
 class SimpleTimer	
 {
 //------------------ Private ----------------
@@ -37,40 +35,39 @@ private:
 	unsigned long _setMillis=0, _prevMillis = 0;
 	int  _eventCount;
 	bool _enabled=true;
-	bool timedOutFunction(){return (millis() - _prevMillis >= _setMillis);}
+	bool timedOut(){return (millis() - _prevMillis >= _setMillis);}
 	void _start(unsigned long u){	_setMillis=u; _prevMillis=millis();}
 	bool firstRun=true;
 
 //------------------ Public -----------------
 public:
 // General purpose variables, free to use
-int				userIntA, 	userIntB;
-bool			userBoolA, 	userBoolB;
-unsigned long 	userULongA,	userULongB;
+int				intA, 	intB;
+bool			boolA, 	boolB;
+unsigned long	longA,	longB;
 virtual ~ SimpleTimer(){}
 
-/** @param msecs milliseconds before the event returns true
+/** @return true if the timing period has elapsed
+*	@param msecs timing period in milliseconds
 *	@param cycles (optional) number of cycles required (0 means continuous)*/
-bool event(unsigned long msecs, int cycles=0){
+bool done(unsigned long msecs, int cycles=0){
 	if(!_enabled){return false;}				// Not valid timeOut
-	if(!timedOutFunction()){return false;}		// Not valid timeOut
-	if(cycles==0){_start(msecs);return true;}	// Continuous mode?
+	if(!timedOut()){return false;}				// Not valid timeOut
+	if(cycles==0){_start(msecs);return true;}	// Auto restart
 	if(firstRun){_start(msecs); firstRun=false; return false;}
 	if(cycles > _eventCount++ ){_start(msecs);return true;}	// Valid timeOut
 	_enabled=false;	
 	firstRun=true;								// Sleep now ...
 	return false;
 }
-/**	@return true if enabled */
-bool enabled(){return _enabled;}
+/**	@return 'true' if the timer is enabled */
+bool isEnabled(){return _enabled;}
 
-/** @param enabled Set to 'true' to enable the timer */
-void enable(bool enabled=true){	_enabled=enabled; _eventCount=0; firstRun=true;}
+/** @param enabled true/false enables/disables the timer */
+void enabled(bool enabled=true){	_enabled=enabled; _eventCount=0; firstRun=true;}
 
-/**	@return milliseconds since enabled, 0 if disabled */
-unsigned long elapsed(){return timedOutFunction() ? 0 : millis() - _prevMillis;}
+/**	@return milliseconds since timing period began, 0 if disabled */
+unsigned long elapsed(){return timedOut() ? 0 : millis() - _prevMillis;}
 
-/** @return number of completed cycle events  */
-int eventCount(){return _eventCount;}
 };
 #endif

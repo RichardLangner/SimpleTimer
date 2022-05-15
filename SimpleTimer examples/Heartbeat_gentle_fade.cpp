@@ -1,6 +1,5 @@
 /*
-Heartbeat : LED pulsing on fast, then fading.
-Works with active HIGH or LOW LED - comment out as appropriate in the heartbeat() function.
+Heartbeat : LED fading up and down slowly.
 
 To stop/start the heartbeat
     Stop    :  timer1.enable(false);
@@ -17,8 +16,12 @@ void setup() {
 }
 
 void heartbeat(){
-    if(timer1.done(50)){analogWrite(ledPin1, (timer1.intA +=10) % 255);}    // active LOW LED
-    //if(timer1.done(50)){analogWrite(ledPin1, 255- (timer1.intA +=10) % 255);} // active HIGH LED
+    if(timer1.done(50)){
+        analogWrite(ledPin1, timer1.intA);    // active LOW LED
+        if(timer1.intA >245){timer1.boolA=true;}        // Don't go off completely
+        if(timer1.intA <10){timer1.boolA=false;}         // Full brightness
+        timer1.intA =(timer1.boolA ? timer1.intA-=10 : timer1.intA+=10);
+    }
 }
 
 void loop() {
