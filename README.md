@@ -1,13 +1,11 @@
 # SimpleTimer
 
-* Auto repeat
-* Multiple or Single shot
-* Disable/enable (auto-starts)
-* Run many timers simultaneously
+* Continuous / Multiple shot / Single shot
+* Disable/enable
+* Run many SimpleTimers simultaneously
+* Schedule functions to run one or more times
 * Non-blocking code does not slow your program
-* Does not require interrupts, works on almost any GPIO pin
-* Schedule functions, to run one or more times
-* Tiny code footprint
+* Tiny code footprint, no interrupts used
 ## WHO NEEDS NEED IT?
 If you just want to blink an LED, or refresh an LCD or regularly read sensors, this is for you.
 ## AUTO-REPEAT<br>
