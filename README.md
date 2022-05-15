@@ -32,7 +32,7 @@ To get the time (ms) a SimpleTimer has been running during a timing period
 
 * `t = timer1.elapsed();`<br><br>
 # EXAMPLE CODE
-The code in the `SimpleTimer_examples` folder use the board's LED_BUILTIN to demonstrate most of SimpleTimer's features.
+The code in the `SimpleTimer_examples` folder use the board's LED_BUILTIN to demonstrate most of SimpleTimer's features. Simply paste the code into your 'main.c' or '.ino' file. and ensure the SimpleTimer header is an 'include' file.
 ## Blink_simple.cpp
 Flashing an LED continuously is simple, here it's 250ms on and 250ms off (2Hz)<br>
 * `if(timer1.done(250) ){`<br>
