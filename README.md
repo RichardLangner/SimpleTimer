@@ -1,9 +1,10 @@
 # SimpleTimer
-## Simplify common tasks e.g.
+## Typical uses
 * Refresh an LCD or OLED every 500ms
 * Read sensors every few minutes
 * Flash an LED continuously, or a preset number of times
 * Heartbeat LED
+* Anywhere you need millisecond timing...
 ## Features
 * Repeating / Multiple shot / Single shot timing
 * Disable/enable
@@ -45,7 +46,7 @@ The code in the `SimpleTimer_examples` folder uses the board's LED_BUILTIN to de
 * Flashes LED 5 times, then stops<br>
 `if(timer1.done(200,10)){digitalWrite(ledPin1, !digitalRead(ledPin1));`
 ## Blink_5_repeating.cpp
-* Flashes LED 5 times, repeats after a pause<br>
+* Flashes LED 5 times, repeats every 5 seconds<br>
 `if(timer1.done(200,10)){digitalWrite(ledPin1,!digitalRead(ledPin1));}
 if(timer2.done(5000)){timer1.enabled(true);}`
 ## Blink_asymmetrical.cpp
