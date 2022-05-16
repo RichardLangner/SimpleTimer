@@ -36,8 +36,7 @@ To check if a SimpleTimer is enabled<br>
 * `if(timer1.isEnabled()){...}`<br>
 ## Elapsed time (progress monitor)
 Returns the time (ms) a SimpleTimer has been running during a timing period
-
-* `unsigned int t = timer1.elapsed();`<br><br>
+* `unsigned long t = timer1.elapsed();`<br><br>
 # EXAMPLE CODE
 The code in the `SimpleTimer_examples` folder uses the board's LED_BUILTIN to demonstrate most of SimpleTimer's features. Simply paste the code into your 'main.c' or '.ino' file and ensure the SimpleTimer header is an 'include' file.
 ## Blink_simple.cpp
