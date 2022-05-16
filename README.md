@@ -35,7 +35,7 @@ To restart a SimpleTimer<br>
 To check if a SimpleTimer is enabled<br>
 * `if(timer1.isEnabled()){...}`<br>
 ## Elapsed time (progress monitor)
-To get the time (ms) a SimpleTimer has been running during a timing period
+Returns the time (ms) a SimpleTimer has been running during a timing period
 
 * `unsigned int t = timer1.elapsed();`<br><br>
 # EXAMPLE CODE
