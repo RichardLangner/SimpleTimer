@@ -16,12 +16,12 @@ void setup() {
   pinMode(ledPin1, OUTPUT);
 }
 
-void heartbeat(){
+void heartbeatpulse(){
     if(timer1.done(50)){analogWrite(ledPin1, (timer1.intA +=10) % 255);}    // active LOW LED
     //if(timer1.done(50)){analogWrite(ledPin1, 255- (timer1.intA +=10) % 255);} // active HIGH LED
 }
 
 void loop() {
-    heartbeat();
+    heartbeatpulse();
     // Your code here
 }
