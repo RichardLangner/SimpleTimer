@@ -1,4 +1,4 @@
-# SimpleTimer : timing made simple
+# SimpleTimer
 ## Simplify common tasks e.g.
 * Refresh an LCD or OLED every 500ms
 * Read sensors every few minutes
