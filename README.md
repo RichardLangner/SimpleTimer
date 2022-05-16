@@ -1,24 +1,30 @@
-# SimpleTimer
-
-* Continuous / Multiple shot / Single shot
+# SimpleTimer : timing made simple
+## Simplify common tasks e.g.
+* Refresh an LCD or OLED every 500ms
+* Read sensors every few minutes
+* Flash an LED a preset number of times
+* Heartbeat LED
+## Features
+* Repeating / Multiple shot / Single shot timing
 * Disable/enable
-* Run many SimpleTimers simultaneously
-* Schedule functions to run one or more times
-* Non-blocking code does not slow your program
-* Tiny code footprint, no interrupts used
-## WHO NEEDS NEED IT?
-If you just want to blink an LED, or refresh an LCD or regularly read sensors, this is for you.
-## AUTO-REPEAT<br>
+* Timing progress monitor
+## Advantages
+* Simplifies your code
+* Multiple SimpleTimers can run simultaneously
+* Schedules functions to run one or more times
+* Tiny code footprint, non-blocking, no interrupts used
+# How do I use it?
+## Auto-repeat, for repetitive tasks<br>
 To run code every 500ms<br>
 * `if(timer1.done(500){...}`<br>
-## MULTIPLE AND SINGLE-SHOT
+## Multiple and single-shot
 Multiple-shot : To run code every 500ms, but only run it 10 times<br>
 * `if(timer1.done(500, 10){...}`
 
 Single-shot : To run code once after a 500ms delay, use a repeat of 1<br>
 * `if(timer1.done(500, 1){...}`<br>
 
-## ENABLE/DISABLE ( START/STOP )
+## Enable/disable (start/stop)
 To start a SimpleTimer if it was previously stopped<br>
 * `timer1.enabled(true);`<br>
 
@@ -27,7 +33,7 @@ To stop a SimpleTimer if it's running<br>
 
 To check if a SimpleTimer is enabled and running<br>
 * `if(timer1.isEnabled()){...}`<br>
-## ELAPSED TIME
+## Elapsed time (progress monitor)
 To get the time (ms) a SimpleTimer has been running during a timing period
 
 * `t = timer1.elapsed();`<br><br>
