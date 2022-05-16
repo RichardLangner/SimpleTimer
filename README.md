@@ -25,11 +25,11 @@ Single-shot : To run code once after a 500ms delay, use a repeat of 1<br>
 * `if(timer1.done(500, 1){...}`<br>
 
 ## Enable/disable (start/stop)
-To start a SimpleTimer if it was previously stopped<br>
-* `timer1.enabled(true);`<br>
-
-To stop a SimpleTimer if it's running<br>
+To prevent a SimpleTimer from running<br>
 * `timer1.enabled(false);`
+
+To restart a SimpleTimer<br>
+* `timer1.enabled(true);`
 
 To check if a SimpleTimer is enabled and running<br>
 * `if(timer1.isEnabled()){...}`<br>
@@ -38,18 +38,10 @@ To get the time (ms) a SimpleTimer has been running during a timing period
 
 * `t = timer1.elapsed();`<br><br>
 # EXAMPLE CODE
-The code in the `SimpleTimer_examples` folder use the board's LED_BUILTIN to demonstrate most of SimpleTimer's features. Simply paste the code into your 'main.c' or '.ino' file. and ensure the SimpleTimer header is an 'include' file.
+The code in the `SimpleTimer_examples` folder use the board's LED_BUILTIN to demonstrate most of SimpleTimer's features. Simply paste the code into your 'main.c' or '.ino' file and ensure the SimpleTimer header is an 'include' file.
 ## Blink_simple.cpp
 Flashing an LED continuously is simple, here it's 250ms on and 250ms off (2Hz)<br>
-* `if(timer1.done(250) ){`<br>
-`digitalWrite(ledPin1, !digitalRead(ledPin1));`<br>
-`}`<br>
 
-To stop the flashing
-* `timer1.enabled(false)`
-
-To restart the flashing
-* `timer1.enabled(true)`
 
 ## Blink_5_then_stop.cpp
 * Flashes LED 5 times, then stops<br>
