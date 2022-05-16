@@ -63,8 +63,8 @@ if(timer2.done(5000)){timer1.enabled(true);}`
 # Why did I write SimpleTimer?
 It can be messy keeping track of millis() if you use more than one timer or delay.<br>So I wanted an easy to use self-contained non-blocking timer.<br>
 
-SimpleTimer gives you more!<br>
-You can run several SimpleTimers at once, and each timer can store your own private variables that you can use for whatever you want e.g to keep track of LED state, the number or state of, well, just about anything...
+SimpleTimer gives you more!<br><br>
+You can run several SimpleTimers at once, and each timer can encapsulate your own private variables that you can use for whatever you want e.g to keep track of LED state, the number or state of, well, just about anything...
 
 If all you want to do is flash an LED, this is the simplest way.
-More complex tasks are also made easier, including a slow glowing/dimming heartbeat to show you software is running OK, see the example code.
+More complex tasks are also made easier, including a slow glowing/dimming heartbeat to show your software is running OK, see the example code.
