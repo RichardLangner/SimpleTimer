@@ -1,11 +1,11 @@
 /*
-Blink an LED 5 times, pause, repeat.
+Blink an LED 3 times (takes 600ms), repeats every 5 secs.
 
 To stop/start
     Stop    :  timer2.enabled(false);
     Restart :  timer2.enabled(true);
 
-Richard Langner, Sheffield Hackspace member, UK. 15 May 2022.
+Richard Langner, Sheffield Hackspace member, UK. 13 Jan 2023.
 */
 #include "SimpleTimer.h"
 
@@ -17,12 +17,12 @@ void setup() {
 }
 
 void loop() {
-    // Toggle LED after 200ms, repeat 10 times then stop
-	if(timer1.done(200,10) ){
+  // Toggle LED every 200ms, 6 times (3 on and 3 off), then disable
+	if(timer1.done(200,6) ){
     digitalWrite(ledPin1, !digitalRead(ledPin1));
     }
 
-  // Repeat blinking every 5 secs, continuously
+  // Restart the 3 blinks every 5 secs
   if(timer2.done(5000)){
     timer1.enabled(true);
     } 

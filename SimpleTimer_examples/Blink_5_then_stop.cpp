@@ -1,11 +1,11 @@
 /*
 Blink an LED 5 times then stop.
 
-To start/stop
+To stop/start
     Stop    :  timer1.enabled(false);
     Restart :  timer1.enabled(true);
 
-Richard Langner, Sheffield Hackspace member, UK. 15 May 2022.
+Richard Langner, Sheffield Hackspace member, UK. 13 Jan 2023.
 */
 #include "SimpleTimer.h"
 
@@ -17,8 +17,8 @@ void setup() {
 }
 
 void loop() {
-    // Toggle LED after 200ms, repeat 10 times (5 on and 5 off) then stop
-	if(timer1.done(200,10) ){
+    // Toggle LED every 400ms, repeat 10 times (5 on and 5 off) then stop
+	if(timer1.done(400,10) ){
     digitalWrite(ledPin1, !digitalRead(ledPin1));
     }
 }

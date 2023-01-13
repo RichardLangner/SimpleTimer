@@ -24,9 +24,9 @@ void loop() {
     // Schedules functions at preset times
     if(timer1.done(1000,12)){
       timer1.intA++;
-      if(timer1.intA== 2){Serial.println("Function runs once at 2 seconds");}
-      if(timer1.intA== 4){Serial.println("Function runs once at 4 seconds");}
-      if(timer1.intA== 8){Serial.println("Function runs once at 8 seconds");}
+      if(timer1.intA== 2){Serial.println("Function runs once at  2 seconds");}
+      if(timer1.intA== 4){Serial.println("Function runs once at  4 seconds");}
+      if(timer1.intA== 8){Serial.println("Function runs once at  8 seconds");}
       if(timer1.intA==12){Serial.println("Function runs once at 12 seconds");}
     }
     // Your program here
