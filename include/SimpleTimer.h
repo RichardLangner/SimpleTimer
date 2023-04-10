@@ -19,6 +19,8 @@
 * 		timer1.enabled(true);
 * 		timer1.enabled(false);
 * 		if(timer1.isEnabled()){...}
+* NOTE .enable allows the timer to start from the 
+*		the next if(timer1.done(....
 * 
 * TIME ELAPSED since a timing period began
 * 		unsigned long t = timer1.elapsed();
@@ -64,7 +66,7 @@ bool done(unsigned long msecs, int cycles=0){
 bool isEnabled(){return _enabled;}
 
 /** @param enabled true/false enables/disables the timer */
-void enabled(bool enabled=true){	_enabled=enabled; _eventCount=0; firstRun=true;}
+void enabled(bool enabled=true){_enabled=enabled; _eventCount=0; firstRun=true;}
 
 /**	@return milliseconds since timing period began, 0 if disabled */
 unsigned long elapsed(){return timedOut() ? 0 : millis() - _prevMillis;}
