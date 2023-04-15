@@ -1,69 +1,83 @@
 /*
-Flash a number with the built-in LED
-Richard Langner, Sheffield Hackspace member, UK. 9 April 2023.
+Flash a three digit number with the built-in LED
+Ideal for informing of the last wifi IP number xxx e.g. 192.168.1.xxx
+Richard Langner, Sheffield Hackspace member, UK. 14 April 2023
 */
 #include "SimpleTimer.h"
-// number to flash, pin to flash, LED active HIGH or LOW, repeats (zero for continuous)
-void flashLED(int num, int LEDpin, bool onLevel, int repeat); 
+#include <stdarg.h>
+// Number to flash, pin to flash, LED active HIGH or LOW, repeats (zero for continuous).
+// Returns the number of completed groups.
+void flashLED(int num, int LEDpin, bool onLevel); 
+
 const int ledPin1 = LED_BUILTIN;
 
 void setup() {
-  pinMode(ledPin1, OUTPUT); 
+    pinMode(ledPin1, OUTPUT); 
     Serial.begin(74880);
 }
 
 void loop() {
-flashLED(412, ledPin1, LOW, 0);
+flashLED(206, ledPin1, LOW, 0);
 }
 
-void flashLED(int num, int LEDpin, bool active, int repeats=0){
-    static SimpleTimer t1;
-    int array[] {(num/100)%10, (num/10)%10, num%10};
-    unsigned long ms;
-    // t1.ntA is the counter of flashes required
-    // t1.intB is the digit position
-    // t1.boolA determines whether mark or space
+void flashLED(int num, int LEDpin, bool active){
+    #define digit_gap_ms    2000            // Pause between each digit
+    #define group_gap_ms    4000            // Pause between each group of digits
+    #define mark_space_ms   200             // On and off times for each flash
+    #define space_ms         1000
+    // Defines below make the code more readable.
+    // They point to internal variables of SimpleTimer that are available to the user.
+    #define flashes         timer.intA      // The number of flashed completed for a digit  
+    #define digit           timer.intB      // Pointer to the array of 3 digits
+    #define digitGap        timer.boolA     // True when gap required between digits
+    #define msec            timer.longA     // Sets times of SPACE ON, inter-digit and inter-group
 
-    if(t1.boolA){
-        // if zero make it a 600ms ON
-        if(array[t1.intB] == 0 && !(t1.intA % 2)){
-            ms=1000; array[t1.intB] = 1; // Change 0 to 1 and extend the on time
-            // Serial.printf("Line %2d ms= %3u array[t1.intB]= %3d\n",__LINE__, ms, array[t1.intB]);
-            if(!t1.boolB){
-                // Set zero flag to only enable once
-                Serial.printf("Line %2d\n",__LINE__);
-                t1.boolB = true;
-                t1.enabled();
-            }
-        }
-        else ms=200;
+    static SimpleTimer timer;
+    static int array[] {(num/100)%10, (num/10)%10, num%10};
 
-        if(ms==1000){Serial.printf("Line %2d ms=1000 millis = %6d\n", __LINE__, millis());}
 
-        if(t1.done(ms, array[t1.intB]*2)){
-            // turn LED on/off if count is ODD/EVEN
-            digitalWrite(LEDpin, !active ^ (t1.intA % 2));  
-            // intA is the number of flashes for the digit     
-            t1.intA ++;
-            Serial.printf("Line %2d array[%d] = %d t1.intA = %d\n", __LINE__, t1.intB, array[t1.intB], t1.intA);
-            }
-
-        if(t1.intA== (array[t1.intB]*2)){   // Have done all the flashes for the current digit?
-            t1.intA=0;                      // Reset flash counter
-            t1.intB++;                      // Go to next digit
-            if(t1.intB > 2){t1.intB=0;}     // Don't go higher than digits 0 to 2
-            t1.boolB=false;                 // Reset zero flag
-            t1.boolA=false;                 // Reset mark:space to space
-        }
-    }
-    else{
-        if(t1.done(3000)){
-            // Turn off the LED during the interdigit pause
-            digitalWrite(LEDpin, !active ^ (t1.intA % 2));
-            t1.boolA=true;
-            t1.enabled();
-            Serial.printf("Line %2d timer1.intB= %d\n", __LINE__, t1.intB);
-        }
+    if(msec == space_ms){
+        if( !timer.done(space_ms )) { digitalWrite(LEDpin, active); }
+        else { timer.enabled(true); msec = digit_gap_ms; }
+        return;    
     }
 
+    if(msec == digit_gap_ms) {
+        if( !timer.done(digit_gap_ms )) { digitalWrite(LEDpin, !active); }
+        else { timer.enabled(true); msec = 0; }
+        return;
+    }
+
+
+    // if(digit == 3){
+    //     digitalWrite(LEDpin, !active);      // Turn off the LED between each group of numbers
+    //     if(timer.done(ms_Group_gap)){
+    //         digit = 0;
+    //         // Serial.printf("Line %2d digit= %d, LED= %s\n", __LINE__, digit, digitalRead(ledPin1) ? "Off" : "On");
+    //         timer.enabled(true);            // Get ready for next timer use
+    //     }
+    //     return;
+    // }
+    
+    if(array[digit] == 0){                  // Check if digit is zero and give a long flash
+    // ******* ADD AN 'OFF' DELAY
+        msec = space_ms;
+
+    }
+
+    if(msec == 0){
+        if(timer.done(mark_space_ms, (array[digit] * 2))){
+            digitalWrite(LEDpin, active ^ (flashes % 2));   // Toggles the LED, 'flashes' even = OFF, odd = ON
+            // Serial.printf("Line %2d digit= %d, flashes= %d, %s\n", __LINE__, digit, flashes, digitalRead(ledPin1) ? "Off" : "On");
+            flashes++;
+        }
+        if(flashes == array[digit] * 2){        // Get next digit
+            flashes = 0;
+            digit++;
+            digitGap = true;                    // Set flag for inter-digit gap timer
+            timer.enabled(true);                // Get ready for next timer use
+            // Serial.printf("Line %2d digit= %d, flashes= %d\n", __LINE__, digit, flashes);
+        }
+    return;
+    }
 }
