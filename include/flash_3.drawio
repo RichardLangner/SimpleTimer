@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="jCsAsDRltVd8h8sEzggu" name="Page-1">
-        <mxGraphModel dx="816" dy="594" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1239" dy="576" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -73,19 +73,19 @@
                 <mxCell id="47" value="flashLED(402, ledPin1, LOW);" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="640" y="40" width="240" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" value="Inter-digit pause.= 2000&lt;br&gt;Space on = 1000&lt;br&gt;Inter-group pause = 4000&lt;br&gt;When done ms=0&lt;br&gt;enable timer" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="880" y="115" width="240" height="90" as="geometry"/>
+                <mxCell id="48" value="Inter-digit pause.= 2000&lt;br&gt;Space on = 1000&lt;br&gt;Inter-group pause = 4000&lt;br&gt;When done ms=0&lt;br&gt;enable timer" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="940" y="100" width="240" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="FLAG&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                <mxCell id="50" value="FLAG&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="200" width="240" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="51" value="timer.longA" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                <mxCell id="51" value="timer.longA" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" parent="1" vertex="1">
                     <mxGeometry x="1110" y="30" width="140" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="53" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="52" target="48">
+                <mxCell id="53" value="" style="edgeStyle=none;html=1;" parent="1" source="52" target="48" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" value="timer.longA (ms) &amp;gt;0" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                <mxCell id="52" value="timer.longA (ms) &amp;gt;0" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" parent="1" vertex="1">
                     <mxGeometry x="640" y="145" width="140" height="30" as="geometry"/>
                 </mxCell>
             </root>
