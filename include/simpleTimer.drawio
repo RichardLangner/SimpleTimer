@@ -1,92 +1,185 @@
 <mxfile host="65bd71144e">
     <diagram id="jCsAsDRltVd8h8sEzggu" name="Page-1">
-        <mxGraphModel dx="816" dy="594" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1211" dy="732" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="2" value="digit&amp;nbsp;++&lt;br&gt;return" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="370" y="505" width="80" height="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="3" value="return" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="425" y="310" width="80" height="32.5" as="geometry"/>
-                </mxCell>
-                <mxCell id="4" value="return" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="240" y="510" width="80" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="45" value="" style="edgeStyle=none;html=1;" parent="1" source="7" target="39" edge="1">
+                <mxCell id="125" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="55" target="71">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="IF (t1.done(200, num [ digit ] * 2))&lt;br&gt;Toggle LED ON/OFF&lt;br&gt;flashes ++" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="160" y="310" width="240" height="60" as="geometry"/>
+                <mxCell id="55" value="group pause&lt;br&gt;LED ON after 3000ms&lt;br&gt;Enable timer :&amp;nbsp;Set Mode = 1 : Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="100" width="240" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="8" target="16" edge="1">
+                <mxCell id="127" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="56" target="75">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="LED OFF after 200ms&lt;br&gt;Enable timer :&amp;nbsp;Set Mode 3 : return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="413" width="240" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="133" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="58" target="69">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="60" y="160"/>
+                            <mxPoint x="180" y="640"/>
+                            <mxPoint x="180" y="370"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="8" value="SELECT CASE digit" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="160" y="140" width="240" height="40" as="geometry"/>
+                <mxCell id="58" value="LED ON after 200ms&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;Enable timer : Set Mode 2 : return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="610" width="240" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" value="Declare a Static digit= 3" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="160" y="80" width="240" height="40" as="geometry"/>
+                <mxCell id="60" value="LED OFF after 1000ms&lt;br&gt;Set mode 0 :Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="230" width="183" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="12" target="3" edge="1">
+                <mxCell id="73" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="61" target="63">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="113" value="" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="61" target="60">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" value="Is digit ZERO?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="292" y="230" width="210" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="126" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="63" target="69">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="63" value="Set mode 2 : Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="300" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="68" style="edgeStyle=none;html=1;" edge="1" parent="1" source="67" target="55">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="67" value="If Mode = 0" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="327" y="50" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="81" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="69" target="56">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" value="If Mode = 2" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="327" y="360" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="71" target="61">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="460" y="240" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="397" y="220"/>
+                        </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="12" value="Turn off LED&lt;br&gt;IF(t1.done(800))&lt;br&gt;Convert number to H T U&amp;nbsp;&lt;br&gt;digitPointer = 0" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="160" y="200" width="240" height="80" as="geometry"/>
+                <mxCell id="71" value="If Mode = 1" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="327" y="180" width="140" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="36" value="" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="39" target="2" edge="1">
+                <mxCell id="123" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="75" target="83">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="397" y="576"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="75" value="If Mode = 3" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="327" y="500" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="YES" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="267" y="250" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="131" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="83" target="58">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="" style="edgeStyle=none;html=1;" parent="1" source="16" target="12" edge="1">
+                <mxCell id="134" style="edgeStyle=none;html=1;" edge="1" parent="1" source="83" target="86">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="600" y="564"/>
+                            <mxPoint x="600" y="690"/>
+                            <mxPoint x="397" y="690"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="83" value="Done enough flashes ?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="292" y="544" width="210" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="85" value="NO" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="352" y="579" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="86" target="89">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" value="" style="edgeStyle=none;html=1;" parent="1" source="16" target="30" edge="1">
+                <mxCell id="86" value="Point to next digit" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="720" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="100" style="edgeStyle=none;html=1;entryX=0.432;entryY=-0.041;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="88" target="97">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="387" y="934"/>
+                            <mxPoint x="187" y="934"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="88" value="Set mode 4 : Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="884" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="91" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="89" target="88">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="digit&amp;nbsp;== 3" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="10" y="220" width="100" height="35" as="geometry"/>
-                </mxCell>
-                <mxCell id="31" value="" style="edgeStyle=none;html=1;" parent="1" source="30" target="7" edge="1">
+                <mxCell id="93" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="89" target="92">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="digit&amp;nbsp;== 0 ,1, 2" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="10" y="322.5" width="100" height="35" as="geometry"/>
+                <mxCell id="89" value="Done all 3 digits?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="292" y="779" width="210" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="37" value="No,&lt;br&gt;do more flashes" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="170" y="470" width="110" height="30" as="geometry"/>
+                <mxCell id="92" value="Set mode 0 : Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="607" y="784" width="140" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="38" value="Yes,&lt;br&gt;next digit please" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="350" y="400" width="155" height="30" as="geometry"/>
+                <mxCell id="94" value="YES" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="487" y="811" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="46" value="" style="edgeStyle=none;html=1;" parent="1" source="39" target="4" edge="1">
+                <mxCell id="99" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="97" target="98">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="39" value="flashes == num ?" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="175" y="400" width="210" height="60" as="geometry"/>
+                <mxCell id="97" value="If Mode = 4" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="107" y="984" width="140" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="47" value="flashLED(402, ledPin1, LOW);" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="640" y="40" width="240" height="40" as="geometry"/>
+                <mxCell id="98" value="inter-digit pause&lt;br&gt;LED OFF : start timer (1000)&lt;br&gt;Enable timer :&amp;nbsp;Set Mode = 1 : Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="964" width="240" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" value="Inter-digit pause.= 2000&lt;br&gt;Space on = 1000&lt;br&gt;Inter-group pause = 4000&lt;br&gt;When done ms=0&lt;br&gt;enable timer" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="880" y="115" width="240" height="90" as="geometry"/>
+                <mxCell id="101" value="NO" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="387" y="854" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="50" value="FLAG&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-                    <mxGeometry x="200" width="240" height="40" as="geometry"/>
+                <mxCell id="102" value="NO" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="383" y="270" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="51" value="timer.longA" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
-                    <mxGeometry x="1110" y="30" width="140" height="30" as="geometry"/>
+                <mxCell id="103" value="YES" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="487" y="540" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="53" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="52" target="48">
+                <mxCell id="106" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="104" target="105">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" value="timer.longA (ms) &amp;gt;0" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
-                    <mxGeometry x="640" y="145" width="140" height="30" as="geometry"/>
+                <mxCell id="104" value="If Mode = 5" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="107" y="1094" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="inter-digit pause&lt;br&gt;LED ON&amp;nbsp;:start timer (1000)&lt;br&gt;Enable timer :&amp;nbsp;Set Mode = 1 : Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="277" y="1074" width="240" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" value="LED OFF" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="140" y="200" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="117" value="LED OFF" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="470" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="118" value="LED ON" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="200" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="119" value="LED ON" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="187" y="370" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="120" value="LED ON" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="609" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="128" value="LED ON" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="407" y="383" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="132" value="LED OFF" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="407" y="579" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="136" value="LED OFF" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="413" y="690" width="60" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
