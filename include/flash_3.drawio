@@ -1,6 +1,10 @@
 <mxfile host="65bd71144e">
     <diagram id="jCsAsDRltVd8h8sEzggu" name="Page-1">
+<<<<<<< HEAD:include/simpleTimer.drawio
         <mxGraphModel dx="1211" dy="732" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+=======
+        <mxGraphModel dx="1239" dy="576" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+>>>>>>> 77d713b44574d6e9283a9dec7bc0a2564a7ce909:include/flash_3.drawio
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -139,6 +143,7 @@
                 <mxCell id="98" value="inter-digit pause&lt;br&gt;LED OFF : start timer (1000)&lt;br&gt;Enable timer :&amp;nbsp;Set Mode = 1 : Return" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="277" y="964" width="240" height="60" as="geometry"/>
                 </mxCell>
+<<<<<<< HEAD:include/simpleTimer.drawio
                 <mxCell id="101" value="NO" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="387" y="854" width="60" height="30" as="geometry"/>
                 </mxCell>
@@ -180,6 +185,22 @@
                 </mxCell>
                 <mxCell id="136" value="LED OFF" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
                     <mxGeometry x="413" y="690" width="60" height="30" as="geometry"/>
+=======
+                <mxCell id="48" value="Inter-digit pause.= 2000&lt;br&gt;Space on = 1000&lt;br&gt;Inter-group pause = 4000&lt;br&gt;When done ms=0&lt;br&gt;enable timer" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="940" y="100" width="240" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="FLAG&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="200" width="240" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="timer.longA" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" parent="1" vertex="1">
+                    <mxGeometry x="1110" y="30" width="140" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="" style="edgeStyle=none;html=1;" parent="1" source="52" target="48" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="timer.longA (ms) &amp;gt;0" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" parent="1" vertex="1">
+                    <mxGeometry x="640" y="145" width="140" height="30" as="geometry"/>
+>>>>>>> 77d713b44574d6e9283a9dec7bc0a2564a7ce909:include/flash_3.drawio
                 </mxCell>
             </root>
         </mxGraphModel>
