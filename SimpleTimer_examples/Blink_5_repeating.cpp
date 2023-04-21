@@ -7,6 +7,8 @@ To stop/start
 
 Richard Langner, Sheffield Hackspace member, UK. 13 Jan 2023.
 */
+
+#include <Arduino.h>
 #include "SimpleTimer.h"
 
 SimpleTimer timer1, timer2;

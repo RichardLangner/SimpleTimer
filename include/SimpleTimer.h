@@ -7,7 +7,9 @@
 * 		SimpleTimer timer1;
 * 
 * AUTO-REPEAT every 500ms until disabled
-* 		if(timer1.done(500){...}
+* 		if(timer1.done(500, 0){...}
+*	or simply
+*			if(timer1.done(500){...}
 * 
 * AUTO-REPEAT every 500ms, do this 10 times
 * 		if(timer1.done(500, 10){...}
