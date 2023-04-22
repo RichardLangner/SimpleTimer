@@ -25,13 +25,12 @@ void flashDigit(int num){
 
 	if (!timer1.done(ms, 0)){ return;}							// Return if nothing to do.
 
-    int array[] {(2*num/100)%10, (2*num/10)%10, 2*num%10};  // H,T,U and intergroup indicator
+    int array[] {(0, 2*num/100)%10, 0, (2*num/10)%10, 0, 2*num%10, 0};  // H,T,U and intergroup indicator
     
     digitalWrite(ledPin, (state ? HIGH:LOW));
     
+
     
-
-
     //
     // Use timer1.intA  array pointer to digit value
     // Use timer1.intB  counts flashes done
