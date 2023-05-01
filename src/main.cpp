@@ -17,7 +17,7 @@ void setup() {
 }
 
 void loop() {
-	flashDigit(5,3);
+	flashDigit(12345,5);
 }
 
 void flashDigit(int num, int pad){
@@ -30,19 +30,18 @@ void flashDigit(int num, int pad){
 	if (!timer1.done(ms, 0)){ return;}
     
     // H,T,U and interdigit indicators
-    int array[] {-500, (num/100), -500, (num/10)%10, -500, num %10, -2000};
-    Serial.printf("Num= %d%d%d\n",array[1],array[3],array[5]);
+    int array[] {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2000};
+    Serial.printf("Num= %d%d%d%d%d\n",array[1],array[3],array[5],array[7],array[9]);
     DEBUG
 
-    int offset = 6 - 2*pad;
+    int offset = 10 - 2*pad;
     // Array pointer is even, or zero?
     if(array[arrayPointer] < 0){    // Inter-digit gap (it's a minus value)
         digitalWrite(ledPin,1);  DEBUG2    // Turn LED off
         ms = -array[arrayPointer];  // Make value positive
-        ++arrayPointer %=7;         // Next array element (or wrap around to zero)
+        ++arrayPointer %=11;         // Next array element (or wrap around to zero)
         if(arrayPointer==0) {arrayPointer= offset;}
         flashCounter=0;             // Reset flash counter
-       
         return;
     }
 
@@ -55,7 +54,7 @@ void flashDigit(int num, int pad){
     if(0 == array[arrayPointer]){
         digitalWrite(ledPin,0);
         flashCounter = 0;
-        ++arrayPointer %=7;
+        ++arrayPointer %=11;
         if(arrayPointer==0) {arrayPointer= offset;}
         ms = 1000;
         return;
@@ -67,7 +66,7 @@ void flashDigit(int num, int pad){
         DEBUG2
     return;
     } else {  // Get next digit
-        ++arrayPointer %=7;
+        ++arrayPointer %=11;
         if(arrayPointer==0) {arrayPointer= offset;}
         flashCounter = 0;
         DEBUG2
