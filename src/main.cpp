@@ -1,11 +1,15 @@
 /* 
-Blink number, up to 5 digits, with a 1000ms gap between each digit. Then repeats afet 2000ms.
-The flash 'on' and 'off' period is 200ms each. A zero is 1000ms on.
-Written by Richard Langner, Sheffield Hackspace, UK 1 May 2023.
+Blink (up to) a 5 digit number on a single LED. 500ms gap between each digit.
+Repeats after 2000ms. Returns 'true' when it completes a group of digits.
+The flash 'on' and 'off' period is 200ms each. A zero is 1000ms 'on'.
+Interdigit gap is defined by a negative number of ms.
+Written by Richard Langner, Sheffield Hackspace, UK 2 May 2023.
+Latest code on github.com/RichardLangner
 */
 
 #include "SimpleTimer.h"					// Include the Timer class definition.
-void flashDigit(int num, int pad);
+// num: up to 99999, wide: up to 5 digits displayed 
+bool flashDigit(int num, int wide);
 int ledPin = D4;                            // Wemos D1 mini LED pin
 #define DEBUG Serial.printf("%3d After %4d ms of LED %s, P=%d, digit=%d, F=%d\n", __LINE__, ms, digitalRead(ledPin) ? "Off":"On ", arrayPointer, array[arrayPointer], flashCounter);
 #define DEBUG2 Serial.printf("%3d LED=%s\n", __LINE__, digitalRead(ledPin) ? "Off":"On ");
@@ -17,32 +21,35 @@ void setup() {
 }
 
 void loop() {
-	flashDigit(12345,5);
+	flashDigit(98765,5);
 }
 
-void flashDigit(int num, int pad){
+bool flashDigit(int num, int wide){
     static SimpleTimer timer1;
     static int ms = 300;
     static int flashCounter =0;
     static int arrayPointer=0;
 
     // Return if nothing to do; starts timer if not already running.
-	if (!timer1.done(ms, 0)){ return;}
-    
-    // H,T,U and interdigit indicators
+	if (!timer1.done(ms, 0)){return false;}
+    // Validate arguments
+    if(num <0 or wide <1 or wide >5) {return false;}
+
+    // Digit values and interdigit times
     int array[] {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2000};
     Serial.printf("Num= %d%d%d%d%d\n",array[1],array[3],array[5],array[7],array[9]);
     DEBUG
+    // Calculate the array position to start at
+    int offset = 10 - 2*wide;
 
-    int offset = 10 - 2*pad;
-    // Array pointer is even, or zero?
+    // Gaps between digits
     if(array[arrayPointer] < 0){    // Inter-digit gap (it's a minus value)
         digitalWrite(ledPin,1);  DEBUG2    // Turn LED off
         ms = -array[arrayPointer];  // Make value positive
         ++arrayPointer %=11;         // Next array element (or wrap around to zero)
         if(arrayPointer==0) {arrayPointer= offset;}
         flashCounter=0;             // Reset flash counter
-        return;
+        return false;
     }
 
     // Change the LED state; if flashCounter is 'even' turn off LED
@@ -57,18 +64,18 @@ void flashDigit(int num, int pad){
         ++arrayPointer %=11;
         if(arrayPointer==0) {arrayPointer= offset;}
         ms = 1000;
-        return;
+        return false;
     }
 
     // Digit value is non-zero. Either get more flashes, or get next digit
     if(flashCounter < array[arrayPointer] *2 ){
         ms = 200;
         DEBUG2
-    return;
+    return false;
     } else {  // Get next digit
         ++arrayPointer %=11;
         if(arrayPointer==0) {arrayPointer= offset;}
         flashCounter = 0;
         DEBUG2
-    return; }
+    return false; }
 }
