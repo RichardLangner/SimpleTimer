@@ -1,94 +1,26 @@
 /* 
-Blink (up to) a 5 digit number on a single LED. 500ms gap between each digit.
-Repeats after 2000ms. Returns 'true' when it completes a group of digits.
-The flash 'on' and 'off' period is 200ms each. A zero is 1000ms 'on'.
-Interdigit gap is defined by a negative number of ms.
+Blink (up to) a 5 digit number on a single LED, with 500ms gap between each digit.
+Returns 'true' when it completes a group of digits, then repeats after several seconds. 
+The flash 'on' and 'off' period is 200ms each. A zero is represented by 1000ms 'on'.
+
 Written by Richard Langner, Sheffield Hackspace, UK 3 May 2023.
-Latest code on github.com/RichardLangner/SimpleTimer
+Latest code and examples on github.com/RichardLangner/SimpleTimer
 */
 
 #include "SimpleTimer.h"					// Include the Timer class definition.
-// num: up to 99999, wide: up to 5 digits displayed 
-bool flashNumber(int num, int wide);
-int ledPin = D4;                            // Wemos D1 mini LED pin
-int counter=0;
-#define DEBUG Serial.printf("%3d After %4d ms of LED %s, P=%d, digit=%d, F=%d\n", __LINE__, ms, digitalRead(ledPin) ? "Off":"On ", arrayPointer, array[arrayPointer], flashCounter);
-#define DEBUG2 Serial.printf("%3d LED=%s\n", __LINE__, digitalRead(ledPin) ? "Off":"On ");
+#include "flashNumber.h"
+
+int ledPin = D4;                            // Wemos D1 mini LED pin, active LOW
+int counter=0;                              // How many time the complete number flashes
 
 void setup() {
-	Serial.begin(74880);
-	pinMode(ledPin, OUTPUT);
+	Serial.begin(74880);                    // Wemos D1 mini default baud rate
+	pinMode(ledPin, OUTPUT);                // Set LED pin to be an output
     digitalWrite(ledPin, HIGH);             // LED is active LOW
 }
 
 void loop() {
-    if(flashNumber(counter,2)){
-        Serial.printf("Counter -------------------------------------- %d\n", ++counter );
+    if(flashNumber(counter, 2, ledPin, LOW)){
+        Serial.printf("Counter has just done ------------------------------------- %d\n", counter++ );
     };
-}
-
-bool flashNumber(int num, int wide){
-    static SimpleTimer timer1;
-    static int ms = 10;
-    static int flashCounter =0;
-    static int arrayPointer= 10 - 2*wide;
-
-    // Return if nothing to do; starts timer if not already running.
-	if (!timer1.done(ms, 0)){return false;}
-    // Validate arguments
-    if(num <0 or wide <1 or wide >5) {return false;}
-
-    // Digit values and interdigit times
-    int array[] {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2500};
-    Serial.printf("Num= %d%d%d%d%d\n",array[1],array[3],array[5],array[7],array[9]);
-    DEBUG
-    // Calculate the array position to start at
-    int offset = 10 - 2*wide;
-
-    // Gaps between digits
-    if(array[arrayPointer] < 0){    // Inter-digit gap (it's a minus value)
-        digitalWrite(ledPin,1);  DEBUG2    // Turn LED off
-        ms = -array[arrayPointer];  // Make value positive
-        flashCounter=0;             // Reset flash counter
-        ++arrayPointer %=11;         // Next array element (or wrap around to zero)
-        if(arrayPointer==0) {
-            arrayPointer= offset;
-            return true;
-        }
-        return false;
-    }
-
-    // Change the LED state; if flashCounter is 'even' turn off LED
-    flashCounter++; 
-    digitalWrite(ledPin, flashCounter %2 ? LOW :HIGH);        // Odd count = LOW (LED on)
-    DEBUG2
-
-    // If the digit value is zero
-    if(0 == array[arrayPointer]){
-        digitalWrite(ledPin,0);
-        flashCounter = 0;
-        ms = 1000;
-        ++arrayPointer %=11;
-        if(arrayPointer==0) {
-            arrayPointer= offset;
-            return true;
-        }
-        
-        return false;
-    }
-
-    // Digit value is non-zero. Either get more flashes, or get next digit
-    if(flashCounter < array[arrayPointer] *2 ){
-        ms = 200;
-        DEBUG2
-    return false;
-    } else {  // Get next digit
-        flashCounter = 0;
-        ++arrayPointer %=11;
-        if(arrayPointer==0) {
-            arrayPointer= offset;
-            return true;
-        }  
-        DEBUG2
-    return false; }
 }
