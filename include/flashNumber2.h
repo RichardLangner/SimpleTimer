@@ -39,14 +39,13 @@ bool flashNumber(int num, int wide, int ledPin, int activeLevel){
     DEBUG
 
     // Calculate the offset array position to start at
-    if(wide==0){offset= 10-(2 * ((int)log10(num) +1));} else {offset = 10 - 2*wide;}DEBUG
-
-    if(arrayPointer==0) {
-        arrayPointer= offset;
-        // return true;
-    }
-    DEBUG
+    if(wide==0){
+        offset= 10-(2 * ((int)log10(num) +1));
+        
+    } else {offset = 10 - 2*wide;}
     
+    DEBUG
+
     // Gaps between digits
     if(array[arrayPointer] < 0){    // Inter-digit gap (as it's a minus value)
         digitalWrite(ledPin,1);  DEBUG2    // Turn LED off

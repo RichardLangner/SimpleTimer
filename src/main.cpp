@@ -20,7 +20,7 @@ void setup() {
 }
 
 void loop() {
-    if(flashNumber(counter, 2, ledPin, LOW)){
+    if(flashNumber(counter, 0, ledPin, LOW)){
         Serial.printf("Counter has just done ------------------------------------- %d\n", counter++ );
     };
 }
