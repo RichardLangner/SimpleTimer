@@ -1,9 +1,9 @@
 /* 
 Blink (up to) a 5 digit number on a single LED. 500ms gap between each digit.
-Repeats after 2000ms. Returns 'true' when it completes a group of digits.
+Repeats after 3000ms. Returns 'true' when it completes a group of digits.
 The flash 'on' and 'off' period is 200ms each. A zero is 1000ms 'on'.
 Interdigit gap is defined by a negative number of ms.
-Written by Richard Langner, Sheffield Hackspace, UK 13 May 2023.
+Written by Richard Langner, Sheffield Hackspace, UK 15 May 2023.
 Latest code on github.com/RichardLangner/SimpleTimer
 */
 #ifndef FLASHNUMBER
@@ -35,7 +35,6 @@ bool flashNumber(int num, int wide, int ledPin, int activeLevel){
 
     // Digit values and interdigit times
     int array[] {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2500};
-    // Serial.printf("Num= %d%d%d%d%d\n",array[1],array[3],array[5],array[7],array[9]);
 
     // Calculate the offset array position to start at
     if(wide==0){offset= 10-(2 * ((int)log10(num) +1));} else {offset = 10 - 2*wide;}DEBUG
