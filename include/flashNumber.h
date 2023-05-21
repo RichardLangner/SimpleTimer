@@ -3,7 +3,7 @@ Blink (up to) a 5 digit number on a single LED. 500ms gap between each digit.
 Repeats after 3000ms. Returns 'true' when it completes a group of digits.
 The flash 'on' and 'off' period is 200ms each. A zero is 1000ms 'on'.
 Interdigit gap is defined by a negative number of ms.
-Written by Richard Langner, Sheffield Hackspace, UK 20 May 2023.
+Written by Richard Langner, Sheffield Hackspace, UK 21 May 2023.
 Latest code on github.com/RichardLangner/SimpleTimer
 */
 #ifndef FLASHNUMBER
@@ -11,7 +11,7 @@ Latest code on github.com/RichardLangner/SimpleTimer
 #include <Arduino.h>
 
 #include "SimpleTimer.h"
-#define DEBUG Serial.printf("%3d After %4d ms of LED %s, P=%d, digit=%d, F=%d, offset=%d\n", __LINE__, ms, digitalRead(ledPin) ? "Off":"On ", arrayPointer, array[arrayPointer], flashCounter, offset);
+#define DEBUG Serial.printf("%3d After %4d ms of LED %s, num=%d, P=%d, digit=%d, F=%d, offset=%d\n", __LINE__, ms, digitalRead(ledPin) ? "Off":"On ", num, arrayPointer, array[arrayPointer], flashCounter, offset);
 #define DEBUG2 Serial.printf("%3d LED=%s\n", __LINE__, digitalRead(ledPin) ? "Off":"On ");
 
 /** @return - true if all the digits have been flashed.
@@ -37,15 +37,15 @@ bool flashNumber(int num, int wide, int ledPin, bool on){
     int array[] {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2500};
 
     // Calculate the offset array position to start at
-    if(wide==0){offset= 10-(2 * ((int)log10(num) +1));} else {offset = 10 - 2*wide;}DEBUG
-    if(arrayPointer==0) {arrayPointer= offset;}
+    if(wide==0){offset= 10-(2 * ((int)log10(num) +1));} else {offset = 10 - 2*wide;}
+    if(arrayPointer==0) {arrayPointer= offset;}DEBUG
     
-    // Gaps between digits
-    if(array[arrayPointer] < 0){                // Inter-digit gap (indicated by a minus value)
+    // Gaps between digits (indicated by a minus value)
+    if(array[arrayPointer] < 0){                // Inter-digit gap will be less than 0
         digitalWrite(ledPin, !on);              // Turn LED off
         ms = -array[arrayPointer];              // Make value positive
         flashCounter=0; ++arrayPointer %=11;    // Next array element (or wrap around to zero)
-        if(arrayPointer==0) {arrayPointer= offset; return true;}
+        if(arrayPointer==0) {return true;}
         return false;
     }
 
@@ -58,7 +58,7 @@ bool flashNumber(int num, int wide, int ledPin, bool on){
         digitalWrite(ledPin,on);
         ms = 1000;
         flashCounter = 0; ++arrayPointer %=11;
-        if(arrayPointer==0) {arrayPointer= offset; return true;}
+        if(arrayPointer==0) {return true;}
         return false;
     }
 
@@ -66,7 +66,7 @@ bool flashNumber(int num, int wide, int ledPin, bool on){
     if(flashCounter < array[arrayPointer] *2 ){ms = 200; return false;
     } else {  // Get next digit
         flashCounter = 0; ++arrayPointer %=11;
-        if(arrayPointer==0) {arrayPointer= offset; return true;}  
+        if(arrayPointer==0) {return true;}  
         return false; 
     }
 }
