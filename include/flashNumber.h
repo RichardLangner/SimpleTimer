@@ -23,14 +23,13 @@ class FlashDigits
 private:
 bool    _enabled=true;
 int     _ledPin, _led_on;
+SimpleTimer timer1;
+int ms = 10, flashCounter =0, arrayPointer, offset;
 
 public:
 virtual ~ FlashDigits(){}
 
     bool flash(int num, int ledPin, bool LED_on, int width=0){
-        static SimpleTimer timer1;
-        static int ms = 10, flashCounter =0, arrayPointer, offset;
-
         // Exit if disabled
         if(!_enabled){return false;}
         // Return if nothing to do; starts timer if not already running.
@@ -39,7 +38,7 @@ virtual ~ FlashDigits(){}
         if(num <0 or width <0 or width >5) {return false;}
 
         // Digit values and interdigit times
-        int array[] {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2500};
+        int array[] = {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2500};
 
         // Calculate the offset array position to start at
         if(width==0){offset= 10-(2 * ((int)log10(num) +1));} else {offset = 10 - 2*width;}
