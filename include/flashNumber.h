@@ -25,6 +25,7 @@ bool    _enabled=true;
 int     _ledPin, _led_on;
 SimpleTimer timer1;
 int ms = 10, flashCounter =0, arrayPointer, offset;
+int array[11] = {-500,0,-500,0,-500,0,-500,0,-500,0,-2500};
 
 public:
 virtual ~ FlashDigits(){}
@@ -37,12 +38,22 @@ virtual ~ FlashDigits(){}
         // Validate arguments
         if(num <0 or width <0 or width >5) {return false;}
 
-        // Digit values and interdigit times
-        int array[] = {-500, (num/10000)%10, -500, (num/1000)%10,-500, (num/100)%10, -500, (num/10)%10, -500, num %10, -2500};
+        if(arrayPointer==0){
+            // Digit values and interdigit times
+            // array[1] = (num/10000)%10;
+            // array[3] = (num/1000)%10;
+            // array[5] = (num/100)%10;
+            // array[7] = (num/10)%10;
+            // array[9] =  num %10;
 
-        // Calculate the offset array position to start at
-        if(width==0){offset= 10-(2 * ((int)log10(num) +1));} else {offset = 10 - 2*width;}
-        if(arrayPointer==0) {arrayPointer= offset;}
+            for(int ii = 1, divisor = 10000; ii < 10; ii += 2, divisor /= 10){
+                array[ii] = (num / divisor) % 10;
+            }
+
+            // Calculate the offset array position to start at
+            if(width==0){offset= 10-(2 * ((int)log10(num) +1));} else {offset = 10 - 2*width;}
+            arrayPointer= offset;
+        }
         
         // Gaps between digits (indicated by a minus value)
         if(array[arrayPointer] < 0){                // Check if minus
