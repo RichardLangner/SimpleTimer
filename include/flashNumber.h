@@ -57,31 +57,27 @@ virtual ~ FlashDigits(){}
         if(array[arrayIndex] < 0){                // Check if minus
             digitalWrite(_LED_pin, !_LED_on);     // Turn LED off
             ms = -array[arrayIndex];              // Make gap value positive
-            flashCounter=0; ++arrayIndex %=11;    // Next array element (or wrap around to zero)
-            if(arrayIndex==0) {return true;}
-            return false;
         }
+        else{
+            // Change the LED state; if flashCounter is 'even' turn off LED
+            flashCounter++; 
+            digitalWrite(_LED_pin, flashCounter %2 ? _LED_on : !_LED_on);  // Odd count = on
 
-        // Change the LED state; if flashCounter is 'even' turn off LED
-        flashCounter++; 
-        digitalWrite(_LED_pin, flashCounter %2 ? _LED_on : !_LED_on);  // Odd count = on
+            // If the digit value is zero
+            if(0 == array[arrayIndex]){
+                digitalWrite(_LED_pin,_LED_on);
+                ms = 1000;
+            }
 
-        // If the digit value is zero
-        if(0 == array[arrayIndex]){
-            digitalWrite(_LED_pin,_LED_on);
-            ms = 1000;
-            flashCounter = 0; ++arrayIndex %=11;
-            if(arrayIndex==0) {return true;}
-            return false;
+            // Digit value is non-zero. Either do more flashes, or get next digit
+            if(flashCounter < array[arrayIndex] *2 ){
+                ms = 200; 
+                return false;
+            }
         }
-
-        // Digit value is non-zero. Either do more flashes, or get next digit
-        if(flashCounter < array[arrayIndex] *2 ){ms = 200; return false;
-        } else {  // Get next digit
-            flashCounter = 0; ++arrayIndex %=11;
-            if(arrayIndex==0) {return true;}  
-            return false; 
-        }
+        // Get next digit
+        flashCounter = 0; ++arrayIndex %=11;
+        return(arrayIndex==0);
     }
 
 /**	@return 'true' if the flasher is enabled */

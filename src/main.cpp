@@ -27,7 +27,7 @@ FlashDigits flasher1;               // Create an instance of a flasher object
 FlashDigits flasher2;               // Create a second instance
 
 int ledPin = D4;                    // Wemos D1 mini LED pin, active LOW
-int counter1=0, counter2;           // How many time the complete number flashes
+int counter1=0, counter2=0;           // How many time the complete number flashes
 
 void setup() {
 	Serial.begin(74880);            // Wemos D1 mini default baud rate
