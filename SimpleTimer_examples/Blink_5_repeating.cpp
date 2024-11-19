@@ -1,5 +1,5 @@
 /*
-Blink an LED 3 times (takes 600ms), repeats every 5 secs.
+Use SimpleTimer to blink an LED 3 times (takes 600ms), then repeat every 5 secs.
 
 To stop/start
     Stop    :  timer2.enabled(false);
